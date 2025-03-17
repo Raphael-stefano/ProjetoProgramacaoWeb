@@ -12,6 +12,15 @@ import java.util.List;
 @Table(name = "usuario")
 public class Usuario {
 
+    public Usuario() {}
+
+    public Usuario(String id, String nome, String email, String senha) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+    }
+
     @Id
     @Column
     private String id;
@@ -24,5 +33,6 @@ public class Usuario {
 
     @Column(nullable = false)
     private String senha;
+
 }
 
