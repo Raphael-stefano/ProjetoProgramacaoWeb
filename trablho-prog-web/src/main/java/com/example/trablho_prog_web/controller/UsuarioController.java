@@ -1,7 +1,8 @@
 package com.example.trablho_prog_web.controller;
 
 import com.example.trablho_prog_web.model.Usuario;
-import com.example.trablho_prog_web.repository.UsuarioRepository;
+import com.example.trablho_prog_web.service.UsuarioService;
+import com.example.trablho_prog_web.service.UsuarioService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,10 +13,10 @@ import java.util.UUID;
 @RequestMapping("usuarios")
 public class UsuarioController {
 
-    private UsuarioRepository repository;
+    private UsuarioService service;
 
-    public UsuarioController(UsuarioRepository repository) {
-        this.repository = repository;
+    public UsuarioController(UsuarioService service) {
+        this.service = service;
     }
 
 }
