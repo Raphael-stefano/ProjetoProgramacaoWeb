@@ -32,4 +32,12 @@ public class Postagem {
     @OneToMany
     @JoinColumn(name = "postagem_id")
     private List<Comentario> comentarios;
+
+    public Usuario getAutor() {
+        return autor;
+    }
+
+    public void setAutor(Usuario autor) {
+        this.autor = autor;
+    }
 }

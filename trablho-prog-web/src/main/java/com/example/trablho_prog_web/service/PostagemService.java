@@ -2,6 +2,7 @@ package com.example.trablho_prog_web.service;
 
 import com.example.trablho_prog_web.model.Postagem;
 import com.example.trablho_prog_web.repository.PostagemRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,5 +32,22 @@ public class PostagemService {
     public void deleteById(String id) {
         repository.deleteById(id);
     }
+
+    public List<Postagem> findByAutorId(@Param("usuarioId") String usuarioId) {
+        return repository.findByAutorId(usuarioId);
+    }
+
+    public List<Postagem> findByTitulo(@Param("titulo") String titulo) {
+        return repository.findByTitulo(titulo);
+    }
+
+    public List<Postagem> findByAtivoTrue() {
+        return repository.findByAtivoTrue();
+    }
+
+    public List<Postagem> findByAtivoFalse() {
+        return repository.findByAtivoFalse();
+    }
+
 }
 

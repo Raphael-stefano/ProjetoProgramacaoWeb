@@ -78,5 +78,30 @@ public class GrupoServiceTest {
 
         verify(repository, times(1)).deleteById("1");
     }
-}
 
+    @Test
+    @DisplayName("Deve buscar grupos por usuário")
+    void testBuscarGruposPorUsuario() {
+        String usuarioId = "123";
+        when(repository.buscarGruposPorUsuario(usuarioId)).thenReturn(List.of(grupoMock));
+
+        List<Grupo> resultado = service.buscarGruposPorUsuario(usuarioId);
+
+        assertFalse(resultado.isEmpty());
+        assertEquals(1, resultado.size());
+        verify(repository, times(1)).buscarGruposPorUsuario(usuarioId);
+    }
+
+    @Test
+    @DisplayName("Deve buscar grupos por admin")
+    void testBuscarGruposPorAdmin() {
+        String usuarioId = "123";
+        when(repository.buscarGruposPorAdmin(usuarioId)).thenReturn(List.of(grupoMock));
+
+        List<Grupo> resultado = service.buscarGruposPorAdmin(usuarioId);
+
+        assertFalse(resultado.isEmpty());
+        assertEquals(1, resultado.size());
+        verify(repository, times(1)).buscarGruposPorAdmin(usuarioId);
+    }
+}
