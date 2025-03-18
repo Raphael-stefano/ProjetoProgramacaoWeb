@@ -19,4 +19,9 @@ public class UsuarioController {
         this.service = service;
     }
 
+    @GetMapping("/buscar")
+    public List<Usuario> buscarPorNome(@RequestParam String nome) {
+        return service.findByNome(nome);
+    }
+
 }

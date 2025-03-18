@@ -31,4 +31,13 @@ public class GrupoService {
     public void excluir(String id) {
         repository.deleteById(id);
     }
+
+    public List<Grupo> buscarGruposPorUsuario(String id) {
+        return repository.buscarGruposPorUsuario(id);
+    }
+
+    public List<Grupo> buscarGruposPorAdmin(String id) {
+        return repository.buscarGruposPorAdmin(id);
+    }
+
 }
