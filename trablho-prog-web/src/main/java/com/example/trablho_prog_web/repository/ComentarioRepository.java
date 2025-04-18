@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface ComentarioRepository extends JpaRepository<Comentario, String> {
     List<Comentario> findByAtivoTrue();
+    List<Comentario> findByAutor_id(String autorId);
 }

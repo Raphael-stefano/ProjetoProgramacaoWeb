@@ -1,6 +1,8 @@
 package com.example.trablho_prog_web.repository;
 
 import com.example.trablho_prog_web.model.Grupo;
+import com.example.trablho_prog_web.model.Usuario;
+import com.example.trablho_prog_web.service.ComentarioService;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

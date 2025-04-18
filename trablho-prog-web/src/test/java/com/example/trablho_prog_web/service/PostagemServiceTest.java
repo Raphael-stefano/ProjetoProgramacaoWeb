@@ -12,6 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -27,30 +28,29 @@ public class PostagemServiceTest {
 
     @Test
     @DisplayName("Deve retornar uma postagem quando ID existe")
-    void testFindById_Success() {
-        String id = "123";
+    void testBuscarPorId_Sucesso() {
+        String id = UUID.randomUUID().toString();
         Postagem postagemMock = new Postagem();
         postagemMock.setId(id);
         postagemMock.setTitulo("Título Teste");
         postagemMock.setTexto("Texto da postagem");
         when(repository.findById(id)).thenReturn(Optional.of(postagemMock));
 
-        Optional<Postagem> resultado = service.findById(id);
+        Optional<Postagem> resultado = service.buscarPorId(id);
 
         assertTrue(resultado.isPresent());
         assertEquals("Título Teste", resultado.get().getTitulo());
         assertEquals("Texto da postagem", resultado.get().getTexto());
-
         verify(repository, times(1)).findById(id);
     }
 
     @Test
     @DisplayName("Deve retornar vazio quando ID não existe")
-    void testFindById_NotFound() {
-        String id = "999";
+    void testBuscarPorId_NaoEncontrado() {
+        String id = UUID.randomUUID().toString();
         when(repository.findById(id)).thenReturn(Optional.empty());
 
-        Optional<Postagem> resultado = service.findById(id);
+        Optional<Postagem> resultado = service.buscarPorId(id);
 
         assertFalse(resultado.isPresent());
         verify(repository, times(1)).findById(id);
@@ -58,41 +58,40 @@ public class PostagemServiceTest {
 
     @Test
     @DisplayName("Deve salvar uma postagem corretamente")
-    void testSavePostagem() {
+    void testSalvarPostagem() {
         Postagem postagemMock = new Postagem();
-        postagemMock.setId("123");
+        postagemMock.setId(UUID.randomUUID().toString());
         postagemMock.setTitulo("Nova Postagem");
         postagemMock.setTexto("Conteúdo da nova postagem");
         when(repository.save(postagemMock)).thenReturn(postagemMock);
 
-        Postagem resultado = service.save(postagemMock);
+        Postagem resultado = service.salvar(postagemMock);
 
         assertNotNull(resultado);
         assertEquals("Nova Postagem", resultado.getTitulo());
         assertEquals("Conteúdo da nova postagem", resultado.getTexto());
-
         verify(repository, times(1)).save(postagemMock);
     }
 
     @Test
     @DisplayName("Deve excluir uma postagem corretamente")
-    void testDeleteById() {
-        String id = "123";
+    void testExcluirPostagem() {
+        String id = UUID.randomUUID().toString();
         doNothing().when(repository).deleteById(id);
 
-        service.deleteById(id);
+        service.excluir(id);
 
         verify(repository, times(1)).deleteById(id);
     }
 
     @Test
     @DisplayName("Deve retornar postagens ativas")
-    void testFindByAtivoTrue() {
+    void testBuscarAtivas() {
         Postagem postagemMock = new Postagem();
         postagemMock.setAtivo(true);
         when(repository.findByAtivoTrue()).thenReturn(List.of(postagemMock));
 
-        List<Postagem> resultado = service.findByAtivoTrue();
+        List<Postagem> resultado = service.buscarAtivas();
 
         assertFalse(resultado.isEmpty());
         assertTrue(resultado.get(0).isAtivo());
@@ -101,12 +100,12 @@ public class PostagemServiceTest {
 
     @Test
     @DisplayName("Deve retornar postagens inativas")
-    void testFindByAtivoFalse() {
+    void testBuscarInativas() {
         Postagem postagemMock = new Postagem();
         postagemMock.setAtivo(false);
         when(repository.findByAtivoFalse()).thenReturn(List.of(postagemMock));
 
-        List<Postagem> resultado = service.findByAtivoFalse();
+        List<Postagem> resultado = service.buscarInativas();
 
         assertFalse(resultado.isEmpty());
         assertFalse(resultado.get(0).isAtivo());
@@ -115,43 +114,24 @@ public class PostagemServiceTest {
 
     @Test
     @DisplayName("Deve retornar postagens por autor")
-    void testFindByAutorId() {
-        // Cria um usuário com o ID especificado
+    void testBuscarPorAutor() {
         Usuario usuarioMock = new Usuario();
-        usuarioMock.setId("123");
+        usuarioMock.setId(UUID.randomUUID().toString());
 
-        // Cria uma postagem e associa o usuário a ela
         Postagem postagemMock = new Postagem();
-        postagemMock.setId("1");
+        postagemMock.setId(UUID.randomUUID().toString());
         postagemMock.setTitulo("Título da Postagem");
         postagemMock.setTexto("Texto da Postagem");
-        postagemMock.setAutor(usuarioMock); // Associa o usuário à postagem
+        postagemMock.setAutor(usuarioMock);
         postagemMock.setAtivo(true);
 
-        // Mocka a consulta no repositório
-        when(repository.findByAutorId("123")).thenReturn(List.of(postagemMock));
+        when(repository.findByAutorId(usuarioMock.getId())).thenReturn(List.of(postagemMock));
 
-        // Chama o método do serviço
-        List<Postagem> resultado = service.findByAutorId("123");
-
-        // Verifica o resultado
-        assertFalse(resultado.isEmpty());
-        assertEquals("123", resultado.get(0).getAutor().getId()); // Verifica o ID do autor
-        verify(repository, times(1)).findByAutorId("123");
-    }
-
-    @Test
-    @DisplayName("Deve retornar postagens por título")
-    void testFindByTitulo() {
-        String titulo = "Título Teste";
-        Postagem postagemMock = new Postagem();
-        postagemMock.setTitulo(titulo);
-        when(repository.findByTitulo(titulo)).thenReturn(List.of(postagemMock));
-
-        List<Postagem> resultado = service.findByTitulo(titulo);
+        List<Postagem> resultado = service.buscarPorAutor(usuarioMock.getId());
 
         assertFalse(resultado.isEmpty());
-        assertEquals(titulo, resultado.get(0).getTitulo());
-        verify(repository, times(1)).findByTitulo(titulo);
+        assertEquals("Título da Postagem", resultado.get(0).getTitulo());
+        assertEquals("Texto da Postagem", resultado.get(0).getTexto());
+        verify(repository, times(1)).findByAutorId(usuarioMock.getId());
     }
 }

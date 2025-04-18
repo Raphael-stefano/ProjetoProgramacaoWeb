@@ -17,3 +17,15 @@ spring:
         hibernate:
             ddl-auto: update
         database-platform: org.hibernate.dialect.H2Dialect
+
+    thymeleaf:
+        cache: false
+        prefix: classpath:/templates/
+        suffix: .html
+        mode: HTML
+        encoding: UTF-8
+        check-template-location: true
+
+    devtools:
+        restart:
+            enabled: true

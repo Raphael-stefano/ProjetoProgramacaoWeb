@@ -9,6 +9,17 @@ public class MainViewerController {
     
     @GetMapping("/") // GET http://localhost:8080/home/
     public String getHome(){
-        return "home.html";
+        return "index.html";
     }
+
+    @GetMapping("/login") // GET http://localhost:8080/home/
+    public String getLogin(){
+        return "login.html";
+    }
+
+    @GetMapping("/cadastro") // GET http://localhost:8080/home/
+    public String getCadastro(){
+        return "cadastro.html";
+    }
+
 }
