@@ -1,0 +1,18 @@
+<div th:fragment="formulario_postagem" class='table-responsive container p-3'>
+    <form action="#" method="post">
+        <div class="mb-3">
+            <label for="titulo" class="form-label">Título</label>
+            <input type="text" class="form-control" id="titulo" name="titulo">
+        </div>
+        <div class="mb-3">
+            <label for="texto" class="form-label">Texto</label>
+            <textarea type="text" class="form-control" id="texto" name="texto" rows="3"></textarea>
+        </div>
+        <select class="form-select mb-3" name='status'>
+            <option selected disabled>Status</option>
+            <option value="0">Inativo</option>
+            <option value="1">Ativo</option>
+        </select>
+        <button type="submit" class="btn btn-warning">Cadastrar Post</button>
+    </form>
+</div>

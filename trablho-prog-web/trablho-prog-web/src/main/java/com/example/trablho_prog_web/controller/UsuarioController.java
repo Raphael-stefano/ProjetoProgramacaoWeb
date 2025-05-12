@@ -2,11 +2,15 @@ package com.example.trablho_prog_web.controller;
 
 import com.example.trablho_prog_web.assembler.UsuarioModelAssembler;
 import com.example.trablho_prog_web.model.Usuario;
+import com.example.trablho_prog_web.repository.UsuarioRepository;
 import com.example.trablho_prog_web.representationModel.UsuarioModel;
 import com.example.trablho_prog_web.service.UsuarioService;
+import jakarta.validation.Valid;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

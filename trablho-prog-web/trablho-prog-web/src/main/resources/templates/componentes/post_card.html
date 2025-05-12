@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="post_card(post)" class="card mb-3 text-center" style="width: 18rem;">
+    <div class="card-header" th:text="${post?.titulo} ?: 'Sem Título'">Título</div>
+    <div class="card-body">
+        <p class="card-text" th:text="${post?.texto} ?: 'Sem Conteúdo'">Conteúdo do post</p>
+        <a th:href="@{/posts/{id}(id=${post?.id ?: ''})}" class="btn btn-primary">Ver postagem</a>
+    </div>
+</div>
+</html>

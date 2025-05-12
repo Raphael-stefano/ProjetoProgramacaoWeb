@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>404 - Página não encontrada</title>
+</head>
+<body>
+<h1>😕 Página não encontrada</h1>
+<p><strong>Status:</strong> <span th:text="${status}">404</span></p>
+<p><strong>Erro:</strong> <span th:text="${error}">Not Found</span></p>
+<p><strong>Mensagem:</strong> <span th:text="${message}">A página que você tentou acessar não existe.</span></p>
+<p><strong>URL:</strong> <span th:text="${path}">/exemplo</span></p>
+
+<a th:href="@{/home/}" style="color: blue;">Voltar para a página inicial</a>
+</body>
+</html>

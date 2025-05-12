@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>500 - Erro Interno</title>
+</head>
+<body>
+<h1>💥 Ocorreu um erro interno no servidor</h1>
+<p><strong>Status:</strong> <span th:text="${status}">500</span></p>
+<p><strong>Erro:</strong> <span th:text="${error}">Internal Server Error</span></p>
+<p><strong>Mensagem:</strong> <span th:text="${message}">Houve um problema ao processar sua solicitação.</span></p>
+<p><strong>URL:</strong> <span th:text="${path}">/exemplo</span></p>
+
+<a th:href="@{/home/}" style="color: blue;">Voltar para a página inicial</a>
+</body>
+</html>

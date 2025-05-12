@@ -1,4 +1,4 @@
-<div th:fragment="formulario_cadastro" class="d-flex flex-row align-items-center justify-content-center text-center">
+<div th:fragment="formulario_cadastro(usuario)" class="d-flex flex-row align-items-center justify-content-center text-center">
     <section style="width: 40%; min-height: 100vh;" class="text-light d-flex flex-column align-items-center justify-content-center px-5">
         <h1>Bem-vindo!</h1>
         <p>Caso já tenha uma conta, faça o login:</p>
@@ -7,7 +7,7 @@
         </a>
     </section>
 
-    <form style="width: 60%; min-height: 100vh;" class="text-light d-flex flex-column align-items-center justify-content-center px-5" method="post">
+    <form th:action="@{/home/salvar}" th:object="${usuario}" style="width: 60%; min-height: 100vh;" class="text-light d-flex flex-column align-items-center justify-content-center px-5" method="post">
 
         <h1>Criar conta</h1>
         <div class="">
@@ -22,7 +22,7 @@
             <div class="input-group mb-3">
                 <span class="input-group-text px-3"><i class="bi bi-people fs-3 text-light"></i></span>
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome de usuário">
+                    <input type="text" class="form-control" id="nome" placeholder="Nome de usuário" th:field="*{nome}"/>
                     <label for="nome" class="form-label px-3">Nome de usuário</label>
                 </div>
             </div>
@@ -30,7 +30,7 @@
             <div class="input-group mb-3">
                 <span class="input-group-text px-3"><i class="bi bi-envelope-at fs-3 text-light"></i></span>
                 <div class="form-floating">
-                    <input type="mail" class="form-control" id="email" name="email" placeholder="E-mail">
+                    <input type="email" class="form-control" id="email" placeholder="E-mail" th:field="*{email}"/>
                     <label for="email" class="form-label px-3">E-mail</label>
                 </div>
             </div>
@@ -38,7 +38,7 @@
             <div class="input-group mb-3">
                 <span class="input-group-text px-3"><i class="bi bi-key fs-3 text-light"></i></span>
                 <div class="form-floating">
-                    <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha">
+                    <input type="password" class="form-control" id="senha" placeholder="Senha" th:field="*{senha}"/>
                     <label for="senha" class="form-label px-3">Senha</label>
                 </div>
             </div>
@@ -46,7 +46,7 @@
             <div class="input-group mb-3">
                 <span class="input-group-text px-3"><i class="bi bi-key-fill fs-3 text-light"></i></span>
                 <div class="form-floating">
-                    <input type="password" class="form-control" id="senha_confirm" name="senha_confirm" placeholder="Confirmar senha">
+                    <input type="password" class="form-control" id="senha_confirm" placeholder="Confirmar senha"/>
                     <label for="senha_confirm" class="form-label px-3">Confirmar senha</label>
                 </div>
             </div>
